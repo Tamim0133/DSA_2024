@@ -111,90 +111,100 @@ public:
         return false;
     }
 
-    // void Delete(int value)
-    // {
-    //     node *cur = root;
-    //     node *prv = NULL;
+    void Delete(int value)
+    {
+        node *cur = root;
+        node *prv = NULL;
 
-    //     while (cur != NULL)
-    //     {
-    //         if (value > cur->value)
-    //         {
-    //             prv = cur;
-    //             cur = cur->Right;
-    //         }
-    //         else if (value < cur->value)
-    //         {
-    //             prv = cur;
-    //             cur = cur->Left;
-    //         }
-    //         else
-    //         {
-    //             break;
-    //         }
-    //     }
-    //     if (cur == NULL)
-    //     {
-    //         cout << "Value is not present in BST\n";
-    //         return;
-    //     }
-    //     // Case 1: both child is NULL
-    //     if (cur->Left == NULL && cur->Right == NULL)
-    //     {
-    //         if (prv->Left != NULL && prv->Left->value == cur->value)
-    //         {
-    //             prv->Left = NULL;
-    //         }
-    //         else
-    //         {
-    //             prv->Right = NULL;
-    //         }
-    //         delete cur;
-    //         return;
-    //     }
-    //     // Case 2: node has only one child
-    //     if (cur->Left == NULL && cur->Right != NULL)
-    //     {
-    //         if (prv->Left != NULL && prv->Left->value == cur->value)
-    //         {
-    //             prv->Left = cur->Right;
-    //         }
-    //         else
-    //         {
-    //             prv->Right = cur->Right;
-    //             ;
-    //         }
-    //         delete cur;
-    //         return;
-    //     }
-    //     if (cur->Left != NULL && cur->Right == NULL)
-    //     {
-    //         if (prv->Left != NULL && prv->Left->value == cur->value)
-    //         {
-    //             prv->Left = cur->Left;
-    //         }
-    //         else
-    //         {
-    //             prv->Right = cur->Left;
-    //         }
-    //         delete cur;
-    //         return;
-    //     }
-    //     // Case 3: node has two child
-    //     node *tmp = cur->Right;
-    //     while (tmp->Left != NULL)
-    //     {
-    //         tmp = tmp->Left;
-    //     }
-    //     int saved = tmp->value;
-    //     Delete(saved);
-    //     cur->value = saved;
-    // }
+        while (cur != NULL)
+        {
+            if (value > cur->value)
+            {
+                prv = cur;
+                cur = cur->Right;
+            }
+            else if (value < cur->value)
+            {
+                prv = cur;
+                cur = cur->Left;
+            }
+            else
+            {
+                break;
+            }
+        }
+        if (cur == NULL)
+        {
+            // cout << "Value is not present in BST\n";
+            return;
+        }
+        // Case 1: both child is NULL
+        if (cur->Left == NULL && cur->Right == NULL)
+        {
+            if (prv->Left != NULL && prv->Left->value == cur->value)
+            {
+                prv->Left = NULL;
+            }
+            else
+            {
+                prv->Right = NULL;
+            }
+            delete cur;
+            return;
+        }
+        // Case 2: node has only one child
+        if (cur->Left == NULL && cur->Right != NULL)
+        {
+            if (prv->Left != NULL && prv->Left->value == cur->value)
+            {
+                prv->Left = cur->Right;
+            }
+            else
+            {
+                prv->Right = cur->Right;
+            }
+            delete cur;
+            return;
+        }
+        if (cur->Left != NULL && cur->Right == NULL)
+        {
+            if (prv->Left != NULL && prv->Left->value == cur->value)
+            {
+                prv->Left = cur->Left;
+            }
+            else
+            {
+                prv->Right = cur->Left;
+            }
+            delete cur;
+            return;
+        }
+        // Case 3: node has two child
+        node *tmp = cur->Right;
+        while (tmp->Left != NULL)
+        {
+            tmp = tmp->Left;
+        }
+        int saved = tmp->value;
+        Delete(saved);
+        cur->value = saved;
+    }
     node *FindMin(node *root)
     {
         while (root->Left != NULL)
             root = root->Left;
         return root;
+    }
+
+    void Inorder(node *a)
+    {
+        if (a == NULL)
+        {
+            return;
+        }
+        Inorder(a->Left);
+        cout << a->value << " ";
+        Inorder(a->Right);
     }
     node *Delete(node *root, int data)
     {
@@ -257,8 +267,12 @@ int main()
     //    bst.BFS();
 
     // Case 3
-    bst.Delete(bst.root, 6);
-    bst.BFS();
+    bst.Inorder(bst.root);
+    cout << endl;
+    // bst.Delete(bst.root, 6);
+    bst.Delete(6);
+    // bst.BFS();
+    bst.Inorder(bst.root);
 
     return 0;
 }
