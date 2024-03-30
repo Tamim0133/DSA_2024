@@ -1,48 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+#define ll long long
 int main()
 {
     int n;
     cin >> n;
-    float arr[n];
-
-    int len = n;
-
+    vector<ll> ph(20000), nh(20000);
     for (int i = 0; i < n; i++)
     {
-        cin >> arr[i];
-    }
-
-    for (int j = 0; j < len; j++)
-    {
-        for (int k = j; k < len; k++)
+        double x;
+        cin >> x;
+        int p = abs(x * 10000);
+        if (x > 0)
         {
-            if ((float)arr[k] <= (float)arr[j])
-            {
-                float x = (float)arr[k];
-                arr[k] = (float)arr[j];
-                arr[j] = (float)x;
-            }
+            ph[p]++;
+        }
+        else
+        {
+            nh[p]++;
         }
     }
-
-    // sort(arr, arr+n);
-
-    for (int i = 0; i < n; i++)
+    for (int i = 10000; i >= 0; i--)
     {
-        cout << arr[i] << endl;
+        while (nh[i])
+        {
+            cout << -i * 1.0000 / 10000 << '\n';
+            nh[i]--;
+        }
     }
-    // vector<float> v(n);
-
-    // for(int i = 0; i < n;i++)
-    // {
-    //     cin >> v[i];
-    // }
-
-    // sort(v.begin(), v.end());
-
-    // for(auto i : v){
-    //     cout << i << '\n';
-    // }
+    for (int i = 0; i <= 10000; i++)
+    {
+        while (ph[i])
+        {
+            cout << i * 1.0000 / 10000 << '\n';
+            ph[i]--;
+        }
+    }
 }
