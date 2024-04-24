@@ -104,8 +104,9 @@ void heapify(int brr[], int N, int i)
 }
 
 // Function to build a Max-Heap from the given array
-void buildHeap(int brr[], int N)
+void buildHeap(int brr[])
 {
+    int N = n;
     // Index of last non-leaf node
     int startIdx = (N / 2) - 1;
 
@@ -129,6 +130,19 @@ void printArray()
 int peak()
 {
     return arr[0];
+}
+
+vector<int> heapsort(int t)
+{
+    vector<int> v;
+    for (int i = 0; i < t; i++)
+    {
+        v.push_back(arr[0]);
+        deleteRoot();
+        buildHeap(arr);
+        printArray();
+    }
+    return v;
 }
 
 // Driver Code

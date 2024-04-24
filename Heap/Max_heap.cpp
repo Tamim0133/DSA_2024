@@ -109,9 +109,10 @@ void heapify(int brr[], int N, int i)
 }
 
 // Function to build a Max-Heap from the given array
-void buildHeap(int brr[], int N)
+void buildHeap(int brr[])
 {
     // Index of last non-leaf node
+    int N = n;
     int startIdx = (N / 2) - 1;
 
     // Perform reverse level order traversal
@@ -122,8 +123,8 @@ void buildHeap(int brr[], int N)
         heapify(brr, N, i);
     }
 
-    for (int i = 0; i < N; i++)
-        arr[i] = brr[i];
+    // for (int i = 0; i < N; i++)
+    //     arr[i] = brr[i];
 }
 // A utility function to print array of size n
 void printArray()
@@ -132,6 +133,19 @@ void printArray()
         cout << arr[i] << " ";
 
     cout << "\n";
+}
+
+vector<int> heapsort(int t)
+{
+    vector<int> v;
+    for (int i = 0; i < t; i++)
+    {
+        v.push_back(arr[0]);
+        deleteRoot();
+        buildHeap(arr);
+        printArray();
+    }
+    return v;
 }
 
 // int peak()
@@ -152,9 +166,17 @@ int main()
     //     n++;
     // }
 
-    // buildHeap(arr, N);
+    // buildHeap(arr);
 
     // printArray();
+
+    // vector<int> sortedArray = heapsort(n);
+
+    // for (auto i : sortedArray)
+    // {
+    //     cout << i << " ";
+    // }
+    // cout << endl;
 
     // হিপ এ এলিমেন্ট যোগ করার জন্য
     // int m;
