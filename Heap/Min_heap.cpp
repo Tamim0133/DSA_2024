@@ -34,6 +34,8 @@ void delete_heapify(int i)
 // Function to delete the root from Heap
 void deleteRoot()
 {
+    if (n == 0)
+        return;
     // Get the last element
     int lastElement = arr[n - 1];
 
@@ -145,6 +147,13 @@ vector<int> heapsort(int t)
     return v;
 }
 
+bool is_empty()
+{
+    if (n == 0)
+        return true;
+    else
+        return false;
+}
 // Driver Code
 int main()
 {
