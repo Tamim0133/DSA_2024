@@ -70,7 +70,7 @@ int main()
 
     int n = 2;
 
-    findNthRoot(x, n);
+    findNthRoot(x, n); //
 }
 
 // This code is contributed

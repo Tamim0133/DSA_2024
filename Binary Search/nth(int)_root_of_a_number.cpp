@@ -39,7 +39,7 @@ int NthRoot(int n, int m)
 
 int main()
 {
-    int n = 3, m = 27;
+    int n = 2, m = 17;
     int ans = NthRoot(n, m);
     cout << "The answer is: " << ans << "\n";
     return 0;

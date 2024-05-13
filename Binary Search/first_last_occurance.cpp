@@ -44,6 +44,7 @@ int last(int arr[], int x, int n)
         {
             res = mid;
             low = mid + 1; // save and keep looking forward
+            // high = mid - 1; // If last occurence was asked
         }
     }
     return res;

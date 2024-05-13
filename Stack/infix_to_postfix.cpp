@@ -102,7 +102,6 @@ int main()
     string str;
     cin >> str;
 
-    // stack<char> s;
     Stack<char> s;
 
     for (auto i : str)
