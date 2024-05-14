@@ -1,60 +1,66 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 1e5 + 10;
+int parent[1000];
+int rankt[1000];
 
-int parent[N];
-int Size[N];
-
-void make(int v)
+int find_root(int i)
 {
-    parent[v] = v;
-    Size[v] = 1;
-}
-
-int find(int v)
-{
-    if (v == parent[v])
-        return v;
-    return parent[v] = find(parent[v]);
-}
-
-void Union(int a, int b)
-{
-    a = find(a);
-    b = find(b);
-
-    if (a != b)
+    if (parent[i] == i)
     {
-        if (Size[a] < Size[b])
-            swap(a, b);
-        parent[b] = a;
-        Size[a] += Size[b];
+        return i;
+    }
+    int root = find_root(parent[i]);
+    parent[i] = root;
+    return root;
+}
+
+int find(int i, int j)
+{
+    int ri = find_root(i);
+    int rj = find_root(j);
+    if (ri == rj)
+    {
+        return 1;
+    }
+    return 0;
+}
+
+void union_set(int i, int j)
+{
+    int ri = find_root(i);
+    int rj = find_root(j);
+    if (ri == rj)
+    {
+        return;
+    }
+    if (rankt[ri] < rankt[rj])
+    {
+        parent[ri] = rj;
+    }
+    else
+    {
+        parent[rj] = ri;
+        if (rankt[ri] == rankt[rj])
+        {
+            rankt[ri]++;
+        }
     }
 }
 
 int main()
 {
-    // Given n nodes , and m edges find connected components
-    int n, m;
-    cin >> n >> m;
-
-    for (int i = 1; i <= n; i++)
-        make(i);
-
-    for (int i = 0; i < m; i++)
+    for (int i = 0; i < 100; i++)
     {
-        int a, b;
-        cin >> a >> b;
-        Union(a, b);
+        parent[i] = i;
+        rankt[i] = 0;
     }
-
-    int components = 0;
-    for (int i = 1; i <= n; i++)
-        if (find(i) == i)
-            components++;
-
-    cout << components << endl;
-
+    union_set(2, 3);
+    union_set(4, 3);
+    union_set(1, 4);
+    union_set(6, 8);
+    cout << find(1, 3) << endl;
+    cout << find(2, 4) << endl;
+    cout << find(6, 3) << endl;
     return 0;
 }
